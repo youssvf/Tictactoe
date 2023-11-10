@@ -26,18 +26,82 @@ public class MovimientosController {
     @GetMapping("/tablero")
     public String tablero(Model model){
         List<Movimiento> movimientos = new ArrayList<>();
+        String[] casillas = new String[9];
+        List<Movimiento> movimientos1 = new ArrayList<>();
+        List<Movimiento> movimientos2 = new ArrayList<>();
         try {
             Statement statement = DBConnection.getInstance().createStatement();
-            ResultSet rs = statement.executeQuery("select * from movimientos");
+            ResultSet rs = statement.executeQuery("select * from movimientos order by fila");
             while (rs.next()){
                 movimientos.add(new Movimiento(rs.getInt("fila"),rs.getInt("columa"),rs.getInt("jugador")));
             }
-            model.addAttribute("movimientos",movimientos);
+            model.addAttribute("movimientos",casillas);
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
 
+        for (Movimiento m: movimientos){
+            switch (m.getJugador()){
+                case 1:
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[0] = "X";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==2){
+                        casillas[1] = "X";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==3){
+                        casillas[2] = "X";
+                    }
+                    if (m.getFila()==2 && m.getColumna() ==1){
+                        casillas[3] = "X";
+                    }
+                    if (m.getFila()==2 && m.getColumna() ==2){
+                        casillas[4] = "X";
+                    }
+                    if (m.getFila()==2 && m.getColumna() ==3){
+                        casillas[5] = "X";
+                    }
+                    if (m.getFila()==3 && m.getColumna() ==1){
+                        casillas[6] = "X";
+                    }
+                    if (m.getFila()==3 && m.getColumna() ==2){
+                        casillas[7] = "X";
+                    }
+                    if (m.getFila()==3 && m.getColumna() ==3){
+                        casillas[8] = "X";
+                    }
+                    break;
+                case 2:
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[0] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[1] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[2] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[3] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[4] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[5] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[6] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[7] = "O";
+                    }
+                    if (m.getFila()==1 && m.getColumna() ==1){
+                        casillas[8] = "O";
+                    }
+            }
+        }
         return "tablero";
     }
 
