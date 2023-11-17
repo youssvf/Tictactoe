@@ -12,7 +12,7 @@ public class DBConnection {
     public static Connection getInstance(){
         if (connection == null){
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://database-1.cabn5upwsapr.us-east-1.rds.amazonaws.com/tictactoe","admin","admin1234");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoe","root","root");
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
